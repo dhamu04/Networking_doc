@@ -1,0 +1,77 @@
+🔄 What is Gratuitous ARP (GARP)?
+
+Gratuitous ARP is when a device sends an ARP request (or reply) for its own IP address, without being asked.
+
+In simple terms:
+“This is my IP address and MAC — everyone, update your ARP tables!”
+
+📘 Use Case Summary:
+Purpose	Description
+🟢 IP conflict detection	A device sends GARP to see if anyone else responds (which would mean a duplicate IP)
+🔄 Update ARP caches	Used to refresh or update other devices’ ARP tables after changes (like MAC address changes)
+📡 Announce IP-MAC binding	When a device comes online or moves to a new port, it announces its IP/MAC
+🧠 Used by Virtual IPs / HA	VRRP, HSRP, and clustering systems use it to shift IP ownership to a new device
+🧪 How GARP Works:
+
+Let’s say a device has:
+
+IP: 192.168.1.10
+
+MAC: AA:BB:CC:DD:EE:FF
+
+It sends:
+
+ARP Request:
+Who has 192.168.1.10? Tell 192.168.1.10
+(Sent as a broadcast)
+
+
+Since it's asking about its own IP, no reply is expected — it's just informing the network.
+
+⚠️ Important Behavior:
+
+Some devices send GARP as a reply instead of a request (less common)
+
+GARP is not a standard part of the ARP process — it's an extension
+
+It’s triggered when:
+
+A system boots
+
+An interface comes up
+
+IP or MAC changes
+
+Failover happens in high availability setups
+
+🧰 Common GARP Use Cases:
+✅ 1. IP Conflict Detection
+
+Before using an IP, send GARP.
+
+If someone replies: “Hey, that’s my IP!” — then there's a conflict.
+
+✅ 2. High Availability (HA) and VRRP/HSRP
+
+When Router B takes over a VIP, it sends GARP so hosts know:
+
+“The IP is now at a different MAC.”
+
+✅ 3. NIC Failover or MAC Change
+
+GARP ensures switches and ARP caches update to the new MAC
+
+🔐 Security Note:
+
+GARP can be abused for ARP spoofing and man-in-the-middle attacks
+
+Network security tools can monitor for excessive or unexpected GARP traffic
+
+✅ Summary:
+Feature	Gratuitous ARP
+Sends ARP for own IP	✅
+Used for IP conflict detection	✅
+Used for announcing MAC changes	✅
+Part of ARP standard?	No (extension)
+Expect reply?	No
+Layer	Layer 2 / 3

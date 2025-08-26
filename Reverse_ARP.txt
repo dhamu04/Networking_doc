@@ -1,0 +1,51 @@
+🔄 What is Reverse ARP (RARP)?
+
+RARP stands for Reverse Address Resolution Protocol, and it's the opposite of ARP.
+
+🧠 ARP vs. RARP:
+Protocol	Used for	Input	Output
+ARP	Find MAC address from IP	IP address	MAC address
+RARP	Find IP address from MAC	MAC address	IP address
+📦 When is RARP used?
+
+RARP was used in the early days of networking for devices that:
+
+Knew their MAC address
+
+But didn't know their IP address
+
+And couldn't store a local configuration (like diskless workstations)
+
+Such a device would broadcast a RARP request, saying:
+
+"Hey, here's my MAC address. Can anyone tell me what IP address I should use?"
+
+A RARP server would respond with the correct IP address.
+
+🛑 Why RARP is Obsolete Now:
+
+RARP had several limitations:
+
+Could only provide an IP address, not other info like gateway, DNS, subnet mask
+
+Required a dedicated RARP server
+
+Worked only over Layer 2
+
+✅ Replaced by:
+
+BOOTP (Bootstrap Protocol)
+
+DHCP (Dynamic Host Configuration Protocol) – the modern standard
+
+DHCP is far more flexible: it can assign IP, subnet, gateway, DNS, lease time, and more.
+
+🔧 Summary:
+Feature	RARP	DHCP
+Direction	MAC ➜ IP	No IP ➜ Full config
+Broadcast?	Yes	Yes
+Needs server?	Yes (RARP server)	Yes (DHCP server)
+Still used?	❌ Obsolete	✅ Standard today
+🧪 Fun fact:
+
+Some embedded devices or legacy UNIX systems still had RARP support back in the day, but you won’t see it in modern networks.

@@ -1,0 +1,58 @@
+🔄 What is Inverse ARP (InARP)?
+
+Inverse ARP is used to discover Layer 3 (IP) addresses of remote devices when you already know the Layer 2 address (like a Frame Relay DLCI or ATM VPI/VCI).
+
+📘 In Simple Terms:
+Protocol	You Know	You Want to Find
+ARP	IP Address	MAC Address
+RARP	MAC Address	IP Address
+Inverse ARP	Layer 2 Address (e.g. DLCI)	IP Address
+📍 Where is InARP Used?
+
+Mainly in non-Ethernet Layer 2 technologies like:
+
+Frame Relay
+
+ATM
+
+X.25
+
+These are non-broadcast multi-access networks — meaning they don't support ARP broadcasts like Ethernet does.
+
+🧪 Example Scenario (Frame Relay):
+
+Router A is connected to Router B over Frame Relay using DLCI 102.
+
+Router A receives Layer 2 info (DLCI 102) but doesn’t yet know B’s IP address.
+
+Router A sends an Inverse ARP request over DLCI 102:
+
+"Hey, what’s your IP address?"
+
+Router B replies with its IP address.
+
+Router A can now route IP traffic to Router B over that DLCI.
+
+✅ Key Features of InARP:
+
+Defined in RFC 2390
+
+Used in non-broadcast environments
+
+Enables dynamic mapping of Layer 2 to Layer 3
+
+Often used in point-to-point WAN links
+
+❌ Why It's Rare Now:
+
+Ethernet-based networks dominate, and Ethernet uses regular ARP
+
+Technologies like Frame Relay and ATM are largely obsolete
+
+Modern networks use DHCP, static IPs, or routing protocols to learn neighbors
+
+🔄 Quick Recap:
+Protocol	Use Case	Common Today?
+ARP	IP ➜ MAC	✅ Yes
+RARP	MAC ➜ IP	❌ No (obsolete)
+InARP	DLCI ➜ IP	❌ Rare (used in legacy WAN tech)
